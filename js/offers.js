@@ -261,8 +261,8 @@ async function enviarEmailPostulacion(postulacion, ofertaId) {
     tokens[tokenRechazar] = { action: 'rechazar', postulacionId: postulacion.id, ofertaId: ofertaId };
     saveTokens(tokens);
 
-    const urlAceptar = `http://127.0.0.1:5501/pages/mails/confirmacion-aceptacion.html?token=${tokenAceptar}`;
-    const urlRechazar = `http://127.0.0.1:5501/pages/mails/confirmacion-rechazo.html?token=${tokenRechazar}`;
+    const urlAceptar = `https://prototipo-acopiadora.vercel.app/pages/mails/confirmacion-aceptacion.html?token=${tokenAceptar}`;
+    const urlRechazar = `https://prototipo-acopiadora.vercel.app/pages/mails/confirmacion-rechazo.html?token=${tokenRechazar}`;
 
     const templateParams = {
         to_email: oferta.email,
