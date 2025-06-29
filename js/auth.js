@@ -14,7 +14,7 @@ function handleLogin(e) {
     const password = document.getElementById('password').value;
     const errorMessage = document.getElementById('errorMessage');
 
-    if (Usuario === 'secretaria.trabajo' && password === 'faustogenial') {
+    if (Usuario === 'secretaria.trabajo' && password === 'centrodeacopio2025') {
         if (errorMessage) errorMessage.style.display = 'none';
         window.location.href = 'pages-secretaria/dashboard-secretaria.html';
     } else {
