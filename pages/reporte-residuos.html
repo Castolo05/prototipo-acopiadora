@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Residuos - Cooperativa</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">COOPERATIVA ORGANIZADA DE<br>SUSTENTABILIDAD</h1>
+            <h2 class="subtitle">REPORTE DE RESIDUOS: complete los siguientes datos</h2>
+        </header>
+
+        <main class="form-container">
+            <form id="reporteForm" class="reporte-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Ej: San Martín 123" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="number" id="telefono" name="telefono" required>
+                </div>
+
+                <p id="mensaje" style="font-weight: bold; color: red;"></p>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="location.href='../index.html'">Inicio</button>
+                    <button type="submit" class="btn-primary">Continuar</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="../js/reports.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postulación - Cooperativa</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">COOPERATIVA ORGANIZADA DE<br>SUSTENTABILIDAD</h1>
+            <h2 class="subtitle">POSTULACIÓN A TRANSPORTE: complete los siguientes datos</h2>
+        </header>
+        
+        <main class="form-container">
+            <form id="postulacionForm" class="reporte-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="history.back()">Volver</button>
+                    <button type="submit" class="btn-primary">Continuar</button>
+                </div>
+            </form>
+            
+            <div id="ofertaInfo" class="oferta-info">
+                <!-- Información de la oferta seleccionada -->
+            </div>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="../js/offers.js"></script>
+</body>
+</html>

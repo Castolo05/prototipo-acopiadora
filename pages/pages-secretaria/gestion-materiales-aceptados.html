@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Materiales Aceptados - Cooperativa</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/secretaria.css">
+</head>
+<body>
+    <div class="container">
+        <button class="logout-btn" onclick="location.href='dashboard-secretaria.html'">
+            VOLVER AL DASHBOARD
+        </button>
+
+        <header class="header">
+            <h1 class="title">MATERIALES ACEPTADOS</h1>
+            <p class="subtitle">Configurar qué materiales acepta la cooperativa</p>
+        </header>
+
+        <div class="info-content">
+            <!-- Sección para editar información informativa -->
+            <div class="info-section" style="margin-top: 30px; border-top: 2px solid #e5e7eb; padding-top: 20px;">
+                <h3 style="color: #1e3a8a; margin-bottom: 20px;">Información de la Sección Informativa</h3>
+                
+                <div class="form-group">
+                    <label for="tituloInformativo">Título Principal</label>
+                    <input type="text" id="tituloInformativo" placeholder="Título de la sección informativa">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subtituloInformativo">Subtítulo</label>
+                    <input type="text" id="subtituloInformativo" placeholder="Subtítulo de la sección">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contenidoInformativo">Contenido Informativo</label>
+                    <textarea id="contenidoInformativo" rows="8" placeholder="Contenido principal de la sección informativa"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-primary" id="guardarInfoBtn">
+                        GUARDAR INFORMACIÓN
+                    </button>
+                    <button type="button" class="btn-secondary" id="restaurarInfoBtn">
+                        RESTAURAR VALORES POR DEFECTO
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/js/info-storage.js"></script>
+    <script src="/js/js-secretaria/gestion-materiales-aceptados.js"></script>
+
+</body>
+</html>

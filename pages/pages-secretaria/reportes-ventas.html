@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes de Ventas - Cooperativa</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/secretaria.css">
+</head>
+<body>
+    
+    <div class="container">
+        <button class="logout-btn" onclick="location.href='dashboard-secretaria.html'">
+            ← Volver al Dashboard
+        </button>
+
+        <header class="header">
+            <h1 class="title">REPORTES DE VENTAS</h1>
+            <p class="subtitle">Distribución por cartonero y registro de ventas</p>
+        </header>
+
+        <!-- Selector de Material -->
+        <div class="info-section">
+            <h3>Seleccionar Material</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="selectMaterial">Tipo de Material:</label>
+                    <!-- DESPUÉS (dinámico) -->
+                    <select id="selectMaterial" onchange="cargarDistribucion()">
+                        <option value="">-- Seleccionar Material --</option>
+                        <!-- Se llenará dinámicamente -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Total Acopiado:</label>
+                    <div id="totalAcopiado" style="font-size: 18px; font-weight: bold; color: #1e3a8a; padding: 10px;">
+                        0 kg
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Distribución -->
+        <div id="tablaDistribucion" style="display: none;">
+            <h3>Distribución por Cartonero</h3>
+            <table class="cartoneros-table">
+                <thead>
+                    <tr>
+                        <th>Cartonero</th>
+                        <th>DNI</th>
+                        <th>Kilos Acopiados</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Formulario de Registro de Venta -->
+        <div id="formularioVenta" class="info-section" style="display: none;">
+            <h3>Registrar Venta</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="kilosVendidos">Kilos Vendidos:</label>
+                    <input type="number" id="kilosVendidos" min="0" step="0.1" placeholder="Ej: 100.5">
+                </div>
+    
+            </div>
+
+            <button class="btn-primary" onclick="registrarVenta()">
+                REGISTRAR VENTA
+            </button>
+        </div>
+
+        <!-- Mensajes de alerta -->
+        <div id="alertContainer"></div>
+
+        <!-- Historial de Ventas -->
+        <div id="historialVentas" class="info-section" style="display: none;">
+            <h3>Historial de Ventas Recientes</h3>
+            <div id="historialContainer"></div>
+        </div>
+
+    </div>
+
+    <script src="../../js/js-secretaria/cartoneros-storage.js"></script>
+    <script src="../../js/js-secretaria/reportes-ventas.js"></script>
+</body>
+</html>

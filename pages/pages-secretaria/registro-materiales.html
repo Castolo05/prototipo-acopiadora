@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Materiales - Cooperativa</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/secretaria.css">
+</head>
+<body>
+    <div class="container">
+        <button class="logout-btn" onclick="location.href='dashboard-secretaria.html'">
+            VOLVER AL DASHBOARD
+        </button>
+
+        <header class="header">
+            <h1 class="title">REGISTRO DE MATERIALES</h1>
+            <p class="subtitle">Registrar materiales entregados por cartoneros y ciudadanos</p>
+        </header>
+
+        <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 40px;">
+            <div class="dashboard-card">
+                <h3>Registro Cartonero</h3>
+                <p>Registrar materiales entregados por un cartonero específico</p>
+                <button class="btn-primary" id="registroCartoneroBtn">
+                    REGISTRAR
+                </button>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Registro Ciudadano</h3>
+                <p>Registrar materiales del "vecino buena onda"</p>
+                <button class="btn-primary" id="registroCiudadanoBtn">
+                    REGISTRAR
+                </button>
+            </div>
+        </div>
+
+        <!-- Formulario para Cartonero -->
+        <div id="formulario-cartonero" class="form-container" style="display: none;">
+            <form class="reporte-form" id="formCartonero">
+                <h3 style="color: #1e3a8a; margin-bottom: 20px;">Registro de Materiales - Cartonero</h3>
+                
+                <div class="form-group">
+                    <label for="cartonero-select">Seleccionar Cartonero *</label>
+                    <select id="cartonero-select" name="cartoneroId" required>
+                        <option value="">Seleccione un cartonero</option>
+                        <!-- Se llenará dinámicamente -->
+                    </select>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>Conexión Bluetooth:</strong> 
+                    <button type="button" class="btn-secondary" id="conectarBalanzaCartonero">
+                        Conectar Balanza
+                    </button>
+                    <span id="bluetooth-status" class="bluetooth-status">Desconectado</span>
+                </div>
+
+                <div id="materiales-cartonero" class="materiales-container">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+
+                <button type="button" class="btn-secondary" id="agregarMaterialCartonero">
+                    Agregar Otro Material
+                </button>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Domicilios Visitados</label>
+                    <div id="domicilios-visitados">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelarCartonero">
+                        CANCELAR
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        REGISTRAR MATERIALES
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Formulario para Ciudadano -->
+        <div id="formulario-ciudadano" class="form-container" style="display: none;">
+            <form class="reporte-form" id="formCiudadano">
+                <h3 style="color: #1e3a8a; margin-bottom: 20px;">Registro de Materiales - Vecino Buena Onda</h3>
+                
+                <div class="alert alert-info">
+                    <strong>Conexión Bluetooth:</strong> 
+                    <button type="button" class="btn-secondary" id="conectarBalanzaCiudadano">
+                        Conectar Balanza
+                    </button>
+                    <span id="bluetooth-status-ciudadano" class="bluetooth-status">Desconectado</span>
+                </div>
+
+                <div id="materiales-ciudadano" class="materiales-container">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+
+                <button type="button" class="btn-secondary" id="agregarMaterialCiudadano">
+                    Agregar Otro Material
+                </button>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelarCiudadano">
+                        CANCELAR
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        REGISTRAR MATERIALES
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <script src="../../js/js-secretaria/cartoneros-storage.js"></script>
+    <script src="../../js/js-secretaria/registro-materiales.js"></script>
+</body>
+</html>

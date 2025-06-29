@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto de Residuos - Cooperativa</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">COOPERATIVA ORGANIZADA DE<br>SUSTENTABILIDAD</h1>
+            <h2 class="subtitle">SI USTED LO DESEA PUEDE ADJUNTAR UNA FOTOGRAFIA DE SUS RESIDUOS</h2>
+        </header>
+        
+        <main class="photo-container">
+            <div class="photo-upload">
+                <div id="dropZone" class="drop-zone">
+                    <p>Arrastre su imagen hasta el recuadro (opcional)</p>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            
+            <button class="btn-primary" onclick="location.href='/pages/confirmacion.html'">
+
+                Finalizar
+            </button>
+        </main>
+    </div>
+    
+    <script src="../js/reports.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Cartoneros - Cooperativa</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/secretaria.css">
+</head>
+
+<body>
+    <div class="container">
+        
+        <button class="logout-btn" onclick="location.href='dashboard-secretaria.html'">
+            VOLVER AL DASHBOARD
+        </button>
+
+        <header class="header">
+            <h1 class="title">GESTIÓN DE CARTONEROS</h1>
+            <p class="subtitle">Administrar cartoneros activos y sus vehículos</p>
+        </header>
+
+        <div class="search-container">
+            
+            <input type="text" placeholder="Buscar por nombre, apellido o DNI..." id="searchInput">
+            <button class="btn-secondary" id="buscarBtn">
+                BUSCAR
+            </button>
+            <button class="btn-primary" onclick="location.href='alta-cartoneros.html'">
+                NUEVO CARTONERO
+            </button>
+        </div>
+
+        <div class="info-content">
+            <table class="cartoneros-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>Vehículo</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cartoneros-tbody">
+                    <!-- Se llenará dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        
+    </div>
+
+    <!-- Scripts en el orden correcto -->
+    <script src="../../js/js-secretaria/cartoneros-storage.js"></script>
+    <script src="../../js/js-secretaria/gestion-cartoneros.js"></script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Listado de Recorridos</title>
+  <link rel="stylesheet" href="/css/secretaria.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      padding: 40px;
+      background-color: #f0f4f8;
+      font-family: sans-serif;
+    }
+
+    .main-container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #1e3a8a;
+    }
+
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<button class="logout-btn" onclick="location.href='dashboard-secretaria.html'">
+    ← Volver al Dashboard
+</button>
+<body>
+  <div class="main-container">
+    <h2 class="main-title">Listado de Recorridos Automáticos</h2>
+
+    <div class="form-group">
+      <label for="correoDestino">Correo de la Secretaría</label>
+      <input type="email" id="correoDestino" placeholder="secretaria@cooperativa.com" />
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="descargarBtn">Descargar Listado</button>
+    
+    </div>
+  </div>
+
+  <script type="module">
+    import '/js/js-secretaria/cartoneros-storage.js';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const input = document.getElementById('correoDestino');
+
+      // Recuperar email desde localStorage si existe
+      const savedEmail = localStorage.getItem('correoDestino');
+      if (savedEmail) {
+        input.value = savedEmail;
+      }
+
+      input.addEventListener('change', () => {
+        const correo = input.value;
+        localStorage.setItem('correoDestino', correo);
+        if (correo.includes('@')) {
+          alert(`El listado se enviará automáticamente a ${correo} de lunes a viernes a las 8:00 AM.`);
+        }
+      });
+
+      const boton = document.getElementById('descargarBtn');
+      boton.addEventListener('click', async () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        if (!window.CartonerosDB) {
+          alert("No se pudo cargar CartonerosDB.");
+          return;
+        }
+
+        const cartoneros = window.CartonerosDB.getActive();
+        if (!cartoneros || cartoneros.length === 0) {
+          alert("No hay cartoneros registrados.");
+          return;
+        }
+
+        const franjasHorarias = ['9 a 12', '13 a 17'];
+        const volumenes = ['A', 'B', 'C', 'D'];
+
+        const nombres = [
+  "Dimas Valdés Nicolás", "Rómulo Roque Sanabria Rosselló", "Leandra Piquer Campillo",
+  "Ludovico Goñi Sarmiento", "Nieves Falcón Romero", "Elio Sáez Páez",
+  "Paca Amor Escobar", "Anabel Carrera-Río", "Samu Fiol",
+  "Regina Moliner Rebollo", "Purificación Burgos Pedrosa", "Eliana Valera Roselló",
+  "Ulises Múgica", "Elián Álamo Vallés", "Blas Román Peral",
+  "Aurora Recio Muriel", "Zacarías Bernal Viñas", "Ariadna Garrido Pascual",
+  "Manolo Cornejo Egea", "Petra Redondo Barrios", "Nerea Benítez Leal",
+  "Paula Escribano", "Simón Barragán Cea", "Aitana Espinosa Toboso",
+  "Adán Tejada Mayoral", "Silvio Cortés Quintana", "Octavio Polo Cordero",
+  "Marcelino Cantos", "Alina Bayona Ferrer", "Federico Dueñas Hermosilla",
+  "Tamara Escobar Moral", "Jacinta Becerra", "Elisa Cañadas Segarra",
+  "Diana Prieto Ledesma", "Matías Tenorio", "Graciela Nieto Latorre",
+  "Joaquín Alarcón", "Bárbara Fuster", "Soledad Moreno Sanz",
+  "Rafael Cuenca Rubio", "Estela Guillén Peinado", "Nicolás Salmerón",
+  "Teodoro Bosch Zamora", "Yolanda Rubió Parra", "Héctor Gadea Serrano",
+  "Eva Bustamante Lozano", "Luis Pino Izquierdo", "Andrea Vico", 
+  "Noelia Marquina Collado", "Cristina Sáez Romero", "Iván Rueda Romero",
+  "Sergio Ferrer Marín", "Carmen Olivares", "Omar Soria", 
+  "Rosa Peña Delgado", "Jonatan Cordero", "Isaías Marchena", 
+  "Celeste Serrat", "Pilar Medina", "Ramiro Sastre"
+];
+
+const direcciones = [
+  "San Martín 372", "Mitre 421", "Belgrano 188", "Rivadavia 670", "Alsina 284",
+  "Sarmiento 539", "Lavalle 324", "Moreno 877", "Castelli 459", "Urquiza 298",
+  "Dorrego 661", "Saavedra 744", "Santa Fe 120", "Corrientes 395", "9 de Julio 808",
+  "Eva Perón 233", "Juan B. Justo 627", "La Rioja 554", "Catamarca 741", "Tucumán 416",
+  "Salta 339", "Jujuy 590", "Independencia 803", "Italia 277", "Francia 663",
+  "España 191", "Perú 488", "Brasil 344", "Chile 936", "México 577", "Colón 715",
+  "Libertad 226", "Buenos Aires 678", "Entre Ríos 301", "Formosa 829", "San Juan 459",
+  "San Luis 114", "Misiones 280", "Neuquén 930", "Chaco 671", "Chubut 242",
+  "Santa Cruz 399", "Tierra del Fuego 105", "Córdoba 788", "Mendoza 353",
+  "La Pampa 911", "Corrientes 223", "Lanús 700", "Avellaneda 658", "Ituzaingó 299",
+  "Merlo 550", "Morón 473", "Florencio Varela 369"
+];
+
+
+
+        doc.setFontSize(14);
+        doc.text("Listado de Recorridos - Cooperativa de Recuperadores Urbanos", 10, 15);
+
+        let y = 25;
+        cartoneros.forEach((c, index) => {
+          doc.setFontSize(11);
+          doc.text(`Cartonero: ${c.nombre} ${c.apellido}`, 10, y);
+          doc.text(`Vehículo: ${c.tipoVehiculo}`, 150, y);
+          y += 6;
+
+          // Encabezado de tabla
+          const headers = ['Reportante', 'Dirección', 'Volumen de materiales', 'Franja horaria'];
+          const colWidths = [50, 60, 40, 40];
+          let x = 10;
+          doc.setFontSize(10);
+          headers.forEach((text, i) => {
+            doc.text(text, x + 2, y);
+            x += colWidths[i];
+          });
+          y += 6;
+
+          // Dibujar celdas
+          for (let i = 0; i < 4; i++) {
+            let xRow = 10;
+            const row = [
+              nombres[Math.floor(Math.random() * nombres.length)],
+              direcciones[Math.floor(Math.random() * direcciones.length)],
+              volumenes[Math.floor(Math.random() * volumenes.length)],
+              franjasHorarias[Math.floor(Math.random() * franjasHorarias.length)]
+            ];
+            row.forEach((cell, j) => {
+              doc.text(cell, xRow + 2, y + 4);
+              doc.rect(xRow, y, colWidths[j], 8);
+              xRow += colWidths[j];
+            });
+            y += 8;
+          }
+
+          y += 10;
+          if (y > 260) {
+            doc.addPage();
+            y = 20;
+          }
+        });
+
+        const fecha = new Date().toISOString().slice(0, 10);
+        doc.save(`recorridos_${fecha}.pdf`);
+      });
+    });
+  </script>
+</body>
+</html>

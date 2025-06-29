@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Cartonero - Cooperativa</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/secretaria.css">
+</head>
+<body>
+    <div class="container">
+        <button class="logout-btn" onclick="location.href='dashboard-secretaria.html'">
+            VOLVER AL DASHBOARD
+        </button>
+
+        <header class="header">
+            <h1 class="title">MODIFICAR CARTONERO</h1>
+            <p class="subtitle">Actualizar datos del cartonero seleccionado</p>
+        </header>
+
+        <div class="alert alert-info">
+            <strong>Información:</strong> Está modificando los datos del cartonero: <span id="cartoneroInfo">Cargando...</span>
+        </div>
+
+        <div class="form-container">
+            <form class="reporte-form" id="modificarCartoneroForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre *</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido *</label>
+                        <input type="text" id="apellido" name="apellido" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dni">DNI *</label>
+                        <input type="text" id="dni" name="dni" pattern="[0-9]{8}" maxlength="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección *</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono">
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoVehiculo">Tipo de Vehículo *</label>
+                    <select id="tipoVehiculo" name="tipoVehiculo" required>
+                        <option value="">Seleccione un vehículo</option>
+                        <option value="carrito">Carrito Manual</option>
+                        <option value="bicicleta">Bicicleta con carro</option>
+                        <option value="moto">Motocicleta con carro</option>
+                        <option value="auto">Automóvil</option>
+                        <option value="camioneta">Camioneta</option>
+                        <option value="camion">Camión</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado *</label>
+                    <select id="estado" name="estado" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                        <option value="suspendido">Suspendido</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="location.href='gestion-cartoneros.html'">
+                        CANCELAR
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        GUARDAR CAMBIOS
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- IMPORTANTE: Cargar primero la base de datos -->
+    <script src="../../js/js-secretaria/cartoneros-storage.js"></script>
+    <script src="../../js/js-secretaria/modificar-cartonero.js"></script>
+</body>
+</html>

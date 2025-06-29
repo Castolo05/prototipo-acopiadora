@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Volumen - Cooperativa</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">COOPERATIVA ORGANIZADA DE<br>SUSTENTABILIDAD</h1>
+            <h2 class="subtitle">SELECCIONE LA CATEGORIA DE VOLUMEN DE SUS RESIDUOS</h2>
+        </header>
+        
+        <main class="selection-container">
+            <div class="volume-options">
+                <div class="volume-option" data-volume="caja">
+                    <span class="volume-text">ENTRAN EN UNA<br>CAJA</span>
+                </div>
+                
+                <div class="volume-option" data-volume="baul">
+                    <span class="volume-text">ENTRAN EN EL BAÚL<br>DE UN AUTO</span>
+                </div>
+                
+                <div class="volume-option" data-volume="camioneta">
+                    <span class="volume-text">ENTRAN EN LA CAJA<br>DE UNA CAMIONETA</span>
+                </div>
+                
+                <div class="volume-option" data-volume="camion">
+                    <span class="volume-text">NECESITO UN<br>CAMIÓN</span>
+                </div>
+            </div>
+            
+            <button id="continueBtn" class="btn-primary" style="display: none;" onclick="location.href='foto-residuos.html'">
+
+                Continuar
+            </button>
+        </main>
+    </div>
+    
+    <script src="../js/reports.js"></script>
+</body>
+</html>

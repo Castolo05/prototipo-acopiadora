@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Ofertas - Cooperativa</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">COOPERATIVA ORGANIZADA DE<br>SUSTENTABILIDAD</h1>
+            <h2 class="subtitle">CARTELERA VIRTUAL</h2>
+        </header>
+        
+        <main class="ofertas-container">
+            <div id="ofertasList" class="ofertas-list">
+                <!-- Las ofertas se cargarán dinámicamente aquí -->
+            </div>
+            
+            <div id="noOfertasMessage" class="no-ofertas" style="display: none;">
+                <p>No hay ofertas disponibles en este momento.</p>
+            </div>
+            
+            <button class="btn-secondary" onclick="location.href='cartelera.html'">
+                Volver
+            </button>
+        </main>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../js/offers.js"></script>
+</body>
+</html>
