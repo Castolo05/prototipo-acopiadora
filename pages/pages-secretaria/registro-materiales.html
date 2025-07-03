@@ -6,6 +6,25 @@
     <title>Registro de Materiales - Cooperativa</title>
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/secretaria.css">
+    <style>
+        .modal {
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -22,17 +41,13 @@
             <div class="dashboard-card">
                 <h3>Registro Cartonero</h3>
                 <p>Registrar materiales entregados por un cartonero específico</p>
-                <button class="btn-primary" id="registroCartoneroBtn">
-                    REGISTRAR
-                </button>
+                <button class="btn-primary" id="registroCartoneroBtn">REGISTRAR</button>
             </div>
 
             <div class="dashboard-card">
                 <h3>Registro Ciudadano</h3>
                 <p>Registrar materiales del "vecino buena onda"</p>
-                <button class="btn-primary" id="registroCiudadanoBtn">
-                    REGISTRAR
-                </button>
+                <button class="btn-primary" id="registroCiudadanoBtn">REGISTRAR</button>
             </div>
         </div>
 
@@ -45,40 +60,28 @@
                     <label for="cartonero-select">Seleccionar Cartonero *</label>
                     <select id="cartonero-select" name="cartoneroId" required>
                         <option value="">Seleccione un cartonero</option>
-                        <!-- Se llenará dinámicamente -->
                     </select>
+                    <button type="button" class="btn-secondary" id="btnAbrirModalCartonero">+ Nuevo Cartonero</button>
                 </div>
 
                 <div class="alert alert-info">
                     <strong>Conexión Bluetooth:</strong> 
-                    <button type="button" class="btn-secondary" id="conectarBalanzaCartonero">
-                        Conectar Balanza
-                    </button>
+                    <button type="button" class="btn-secondary" id="conectarBalanzaCartonero">Conectar Balanza</button>
                     <span id="bluetooth-status" class="bluetooth-status">Desconectado</span>
                 </div>
 
-                <div id="materiales-cartonero" class="materiales-container">
-                    <!-- Se llenará dinámicamente -->
-                </div>
+                <div id="materiales-cartonero" class="materiales-container"></div>
 
-                <button type="button" class="btn-secondary" id="agregarMaterialCartonero">
-                    Agregar Otro Material
-                </button>
+                <button type="button" class="btn-secondary" id="agregarMaterialCartonero">Agregar Otro Material</button>
 
                 <div class="form-group" style="margin-top: 20px;">
                     <label>Domicilios Visitados</label>
-                    <div id="domicilios-visitados">
-                        <!-- Se llenará dinámicamente -->
-                    </div>
+                    <div id="domicilios-visitados"></div>
                 </div>
 
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary" id="cancelarCartonero">
-                        CANCELAR
-                    </button>
-                    <button type="submit" class="btn-primary">
-                        REGISTRAR MATERIALES
-                    </button>
+                    <button type="button" class="btn-secondary" id="cancelarCartonero">CANCELAR</button>
+                    <button type="submit" class="btn-primary">REGISTRAR MATERIALES</button>
                 </div>
             </form>
         </div>
@@ -87,36 +90,140 @@
         <div id="formulario-ciudadano" class="form-container" style="display: none;">
             <form class="reporte-form" id="formCiudadano">
                 <h3 style="color: #1e3a8a; margin-bottom: 20px;">Registro de Materiales - Vecino Buena Onda</h3>
-                
+
                 <div class="alert alert-info">
                     <strong>Conexión Bluetooth:</strong> 
-                    <button type="button" class="btn-secondary" id="conectarBalanzaCiudadano">
-                        Conectar Balanza
-                    </button>
+                    <button type="button" class="btn-secondary" id="conectarBalanzaCiudadano">Conectar Balanza</button>
                     <span id="bluetooth-status-ciudadano" class="bluetooth-status">Desconectado</span>
                 </div>
 
-                <div id="materiales-ciudadano" class="materiales-container">
-                    <!-- Se llenará dinámicamente -->
-                </div>
+                <div id="materiales-ciudadano" class="materiales-container"></div>
 
-                <button type="button" class="btn-secondary" id="agregarMaterialCiudadano">
-                    Agregar Otro Material
-                </button>
+                <button type="button" class="btn-secondary" id="agregarMaterialCiudadano">Agregar Otro Material</button>
 
                 <div class="form-actions">
-                    <button type="button" class="btn-secondary" id="cancelarCiudadano">
-                        CANCELAR
-                    </button>
-                    <button type="submit" class="btn-primary">
-                        REGISTRAR MATERIALES
-                    </button>
+                    <button type="button" class="btn-secondary" id="cancelarCiudadano">CANCELAR</button>
+                    <button type="submit" class="btn-primary">REGISTRAR MATERIALES</button>
                 </div>
             </form>
         </div>
 
+        <!-- Modal Alta Cartonero -->
+        <div id="modal-alta-cartonero" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2 class="title">NUEVO CARTONERO</h2>
+                <p class="subtitle">Registrar un nuevo cartonero</p>
+                <form class="reporte-form" id="altaCartoneroFormModal">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombreModal">Nombre *</label>
+                            <input type="text" id="nombreModal" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidoModal">Apellido *</label>
+                            <input type="text" id="apellidoModal" name="apellido" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dniModal">DNI *</label>
+                            <input type="text" id="dniModal" name="dni" maxlength="8" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaNacimientoModal">Fecha de Nacimiento *</label>
+                            <input type="date" id="fechaNacimientoModal" name="fechaNacimiento" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccionModal">Dirección *</label>
+                        <input type="text" id="direccionModal" name="direccion" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telefonoModal">Teléfono</label>
+                            <input type="tel" id="telefonoModal" name="telefono">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoVehiculoModal">Tipo de Vehículo *</label>
+                        <select id="tipoVehiculoModal" name="tipoVehiculo" required>
+                            <option value="">Seleccione un vehículo</option>
+                            <option value="carrito">Carrito Manual</option>
+                            <option value="bicicleta">Bicicleta con carro</option>
+                            <option value="moto">Motocicleta con carro</option>
+                            <option value="auto">Automóvil</option>
+                            <option value="camioneta">Camioneta</option>
+                            <option value="camion">Camión</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cerrarModalCartonero">CANCELAR</button>
+                        <button type="submit" class="btn-primary">REGISTRAR CARTONERO</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
     <script src="../../js/js-secretaria/cartoneros-storage.js"></script>
     <script src="../../js/js-secretaria/registro-materiales.js"></script>
 </body>
+// Registro de modal para nuevo cartonero en registro-materiales.js
+
+// Función para validar alta de cartonero
+function validarFormularioAltaCartonero(data) {
+    const errores = [];
+    if (!data.nombre.trim()) errores.push('El nombre es obligatorio');
+    if (!data.apellido.trim()) errores.push('El apellido es obligatorio');
+    if (!/^\d{8}$/.test(data.dni)) errores.push('El DNI debe tener exactamente 8 dígitos');
+    if (!data.fechaNacimiento) errores.push('La fecha de nacimiento es obligatoria');
+    if (!data.direccion.trim()) errores.push('La dirección es obligatoria');
+    if (!data.tipoVehiculo) errores.push('Debe seleccionar un tipo de vehículo');
+    return errores;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Abrir modal
+    document.getElementById('btnAbrirModalCartonero').addEventListener('click', () => {
+        document.getElementById('modal-alta-cartonero').style.display = 'flex';
+    });
+
+    // Cerrar modal
+    document.getElementById('cerrarModalCartonero').addEventListener('click', () => {
+        document.getElementById('modal-alta-cartonero').style.display = 'none';
+    });
+
+    // Envío del formulario modal
+    document.getElementById('altaCartoneroFormModal').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const nuevoCartonero = {
+            nombre: formData.get('nombre'),
+            apellido: formData.get('apellido'),
+            dni: formData.get('dni'),
+            fechaNacimiento: formData.get('fechaNacimiento'),
+            direccion: formData.get('direccion'),
+            telefono: formData.get('telefono') || '',
+            tipoVehiculo: formData.get('tipoVehiculo')
+        };
+
+        const errores = validarFormularioAltaCartonero(nuevoCartonero);
+        if (errores.length > 0) {
+            alert('Errores:\n' + errores.join('\n'));
+            return;
+        }
+
+        try {
+            CartonerosDB.create(nuevoCartonero);
+            alert('Cartonero registrado exitosamente');
+            e.target.reset();
+            document.getElementById('modal-alta-cartonero').style.display = 'none';
+            cargarCartoneros();
+        } catch (error) {
+            alert('Error al registrar: ' + error.message);
+        }
+    });
+});
+
 </html>

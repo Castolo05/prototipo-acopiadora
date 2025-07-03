@@ -369,3 +369,54 @@ function handleSubmitCartonero(event) {
     form.reset();
     ocultarFormularios();
 }
+// Función para validar alta de cartonero
+function validarFormularioAltaCartonero(data) {
+    const errores = [];
+    if (!data.nombre.trim()) errores.push('El nombre es obligatorio');
+    if (!data.apellido.trim()) errores.push('El apellido es obligatorio');
+    if (!/^\d{8}$/.test(data.dni)) errores.push('El DNI debe tener exactamente 8 dígitos');
+    if (!data.fechaNacimiento) errores.push('La fecha de nacimiento es obligatoria');
+    if (!data.direccion.trim()) errores.push('La dirección es obligatoria');
+    if (!data.tipoVehiculo) errores.push('Debe seleccionar un tipo de vehículo');
+    return errores;
+}
+
+// Inicialización del modal
+document.getElementById('btnAbrirModalCartonero').addEventListener('click', () => {
+    document.getElementById('modal-alta-cartonero').style.display = 'flex';
+});
+
+document.getElementById('cerrarModalCartonero').addEventListener('click', () => {
+    document.getElementById('modal-alta-cartonero').style.display = 'none';
+});
+
+document.getElementById('altaCartoneroFormModal').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const nuevoCartonero = {
+        nombre: formData.get('nombre'),
+        apellido: formData.get('apellido'),
+        dni: formData.get('dni'),
+        fechaNacimiento: formData.get('fechaNacimiento'),
+        direccion: formData.get('direccion'),
+        telefono: formData.get('telefono') || '',
+        tipoVehiculo: formData.get('tipoVehiculo')
+    };
+
+    const errores = validarFormularioAltaCartonero(nuevoCartonero);
+    if (errores.length > 0) {
+        alert('Errores:\n' + errores.join('\n'));
+        return;
+    }
+
+    try {
+        CartonerosDB.create(nuevoCartonero);
+        alert('Cartonero registrado exitosamente');
+        e.target.reset();
+        document.getElementById('modal-alta-cartonero').style.display = 'none';
+        cargarCartoneros(); // Recarga el select
+    } catch (error) {
+        alert('Error al registrar: ' + error.message);
+    }
+});
